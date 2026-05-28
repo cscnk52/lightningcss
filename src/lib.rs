@@ -18308,7 +18308,13 @@ mod tests {
     minify_test(".foo { color: hwb(194 50% 0%) }", ".foo{color:#80e1ff}");
     minify_test(".foo { color: hwb(194 50 0) }", ".foo{color:#80e1ff}");
     minify_test(".foo { color: hwb(194 50% 50%) }", ".foo{color:gray}");
-    minify_test(".foo { color: light-dark(#FFF, #FFF) }", ".foo{color:#fff}");
+    minify_test(".foo { color: light-dark(#fff, #fff) }", ".foo{color:#fff}");
+    minify_test(".foo { color: light-dark(#ffffff, rgb(255 255 255)) }", ".foo{color:#fff}");
+    minify_test(".foo { color: light-dark(rgb(255 255 255 / 1), hsl(0deg 0% 100%))}", ".foo{color:#fff}");
+    minify_test(".foo { color: light-dark(hsl(0deg 0% 0%), black)}", ".foo{color:#000}");
+    minify_test(".foo { color: light-dark(rgb(0% 0% 0%), black)}",".foo{color:#000}");
+    minify_test(".foo {color: light-dark(#000000ff, rgb(0 0 0 / 1))", ".foo{color:#000}");
+    minify_test(".foo {color: light-dark(hsl(0 0% 100%), rgb(255 255 255))", ".foo{color:#fff}");
     // minify_test(".foo { color: ActiveText }", ".foo{color:ActiveTet}");
     minify_test(
       ".foo { color: lab(29.2345% 39.3825 20.0664); }",
